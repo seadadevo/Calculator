@@ -1,37 +1,72 @@
-function display(val) {
-    document.getElementById('result').value += val;
-    return val;
-}
+const buttons = [
+    { value: "+", class: "key-op" },
+    { value: "-", class: "key-op" },
+    { value: "*", class: "key-op" },
+    { value: "/", class: "key-op" },
+    { value: "7" },
+    { value: "8" },
+    { value: "9" },
+    { value: "4" },
+    { value: "5" },
+    { value: "6" },
+    { value: "1" },
+    { value: "2" },
+    { value: "3" },
+    { value: "0" },
+    { value: "." },
+    { value: "C", action: "clear" },
+    { value: "=", class: "key-ent", action: "solve" },
+  ];
 
-function solve() {
-    let x = document.getElementById('result').value;
+  
+const keysContainer = document.getElementById("keys");
+const result = document.getElementById("result");
 
-    if (isValidExpression(x)) {
-        let y = calculate(x);
-        document.getElementById('result').value = y;
-        return y;
+buttons.forEach((btn) => {
+  const input = document.createElement("input");
+  input.type = "button";
+  input.value = btn.value;
+  input.className = `key ${btn.class || ""}`.trim();
+
+  input.addEventListener("click", () => {
+    if (btn.action === "clear") {
+      clearScreen();
+    } else if (btn.action === "solve") {
+      solve();
     } else {
-        alert("not valid");
-        document.getElementById('result').value = '';
+      display(btn.value);
     }
-}
+  });
 
-function isValidExpression(expression) {
-    const regex = /^[0-9+\-*/().\s]+$/;
-    return regex.test(expression);
-}
+  keysContainer.appendChild(input);
+});
 
-function calculate(expression) {
-    try {
-        let result = new Function(`return ${expression}`)();
-        return result;
-    } catch (error) {
-        alert("error");
-        return '';
-    }
+function display(val) {
+  result.value += val;
 }
 
 function clearScreen() {
-    document.getElementById('result').value = ""
+  result.value = "";
 }
 
+function solve() {
+  try {
+    result.value = eval(result.value);
+  } catch {
+    result.value = "Error";
+  }
+}
+
+document.addEventListener("keydown", function (e) {
+  const allowedKeys = "0123456789+-*/.";
+
+  if (allowedKeys.includes(e.key)) {
+    display(e.key);
+  } else if (e.key === "Enter") {
+    solve();
+  } else if (e.key === "Backspace") {
+    result.value = result.value.slice(0, -1);
+  } else if (e.key === "Escape" || e.key.toLowerCase() === "c") {
+    clearScreen();
+  }
+});
