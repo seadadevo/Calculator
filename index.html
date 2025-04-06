@@ -5,12 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.11.1/lib/browser/math.js"></script>
   </head>
   <body>
+    <button id="theme-toggle" class="toggle-btn1">🌙 Light Mode</button>
+    <p id="memory-display">Memory: 0</p>
+    <button id="toggle-history" class="toggle-btn">Show History</button>
+    <div id="history-panel" class="hidden">
+      <h2>History</h2>
+      <ul id="history-list"></ul>
+    </div>
+
     <div class="calculator">
       <input type="text" id="result" class="output" placeholder="0" />
       <div class="keys" id="keys"></div>
+      <script src="main.js"></script>
     </div>
-    <script src="main.js"></script>
   </body>
 </html>

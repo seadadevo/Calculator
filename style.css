@@ -1,17 +1,47 @@
+:root {
+    --bg-color: #3b3f48;
+    --text-color: #fff;
+    --calculator-bg: #3b3f48;
+    --key-bg: #3b3f48;
+    --key-color: #fff;
+    --key-shadow: 3px 3px 3px #17181c, -3px -3px 3px #676e7e;
+    --key-active-bg: #2c2f36;
+    --key-op-color: cyan;
+    --key-ent-bg: #3b3f48;
+    --toggle-btn-bg: #333;
+    --output-bg: transparent;
+  }
+  
+  .light-theme {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --calculator-bg: #fff;
+    --key-bg: #fff;
+    --key-color: #000;
+    --key-shadow: 3px 3px 3px #17181c, -3px -3px 3px #676e7e;
+    --key-active-bg: #ddd;
+    --key-op-color: #0077b6;
+    --key-ent-bg: #eee;
+    --toggle-btn-bg: #222;
+    --output-bg: transparent;
+  }
+  
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    background-color: #3b3f48;
-}
-
-.calculator {
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    font-family: sans-serif;
+    color: var(--text-color);
+  }
+  
+  .calculator {
     width: 370px;
-    background: #3b3f48;
-    color: #fff;
+    background: var(--calculator-bg);
+    color: var(--text-color);
     position: absolute;
     top: 10%;
     left: 50%;
@@ -20,12 +50,10 @@ body {
     border-radius: 10px;
     padding: 1rem;
     font-weight: bold;
-    box-shadow: 3px 3px 3px #17181c,
-        -3px -3px 3px #676e7e;
-
-}
-
-.output {
+    box-shadow: var(--key-shadow);
+  }
+  
+  .output {
     font-size: 3.5rem;
     text-align: right;
     padding: 1.5rem 1rem 1rem 0;
@@ -34,50 +62,97 @@ body {
     display: block;
     border: none;
     outline: none;
-    background: transparent;
-    color: #fff;
-    box-shadow: inset 3px 3px 3px #17181c,
-        inset -3px -3px 3px #676e7e;
-}
-
-.keys {
+    background: var(--output-bg);
+    color: var(--text-color);
+    box-shadow: inset 3px 3px 3px #17181c, inset -3px -3px 3px #676e7e;
+  }
+  
+  .keys {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 3px;
-
-}
-
-.key { 
-    background: #3b3f48;
-    border:none;
+  }
+  
+  .key {
+    background: var(--key-bg);
+    border: none;
     font-size: 1.5rem;
-    color: #ffff;
+    color: var(--key-color);
     width: 70px;
     height: 70px;
     margin: 0.3rem;
     cursor: pointer;
     border-radius: 30px;
-    box-shadow: 3px 3px 3px #17181c,
-        -3px -3px 3px #676e7e;
-        
-    }
-    
-    .key:active,
-    .key:focus {
-        background: #3b3f48;
-            background: #2c2f36; 
-    box-shadow: inset 3px 3px 3px #17181c, inset -3px -3px 3px #676e7e; 
-    }
-
-    .key-op { 
-        color: cyan;
-    }
-
-    .key-ent{ 
-        grid-column: 4/5;
-        grid-row: 2 / span 5;
-        height: auto;
-        border-radius: 30px;
-        color: cyan;
-        background: #3b3f48;
-    }
+    box-shadow: var(--key-shadow);
+  }
+  
+  .key.active {
+    background: var(--key-active-bg);
+    box-shadow: inset 3px 3px 3px #17181c, inset -3px -3px 3px #676e7e;
+  }
+  
+  .key-op {
+    color: var(--key-op-color);
+  }
+  
+  .key-ent {
+    grid-column: 4/5;
+    grid-row: 2 / span 5;
+    height: auto;
+    border-radius: 30px;
+    background: var(--key-ent-bg);
+    color: var(--key-op-color);
+  }
+  
+  #history-panel {
+    position: fixed;
+    right: 0;
+    top: 60px;
+    width: 250px;
+    background-color: #f9f9f9;
+    border-left: 2px solid #ccc;
+    padding: 15px;
+    height: 100%;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+  }
+  
+  .hidden {
+    transform: translateX(100%);
+  }
+  
+  .toggle-btn {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    padding: 8px 12px;
+    background-color: var(--toggle-btn-bg);
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .toggle-btn1 {
+    left: 10px;
+  }
+  
+  li.listFont {
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  #memory-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: right;
+    font-size: 2rem;
+    color: white;
+    margin: 0;
+  }
+  
+  .key-op-2 {
+    grid-column: 2 / span 2;
+    width: auto;
+  }
+  
